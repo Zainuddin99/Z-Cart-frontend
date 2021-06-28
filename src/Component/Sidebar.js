@@ -20,8 +20,10 @@ function Sidebar({storeName}) {
 
     return (
         <aside>
+            <div className="mobile-whole-wrapper" onClick={handleClick}>
+            </div>
             <Search storeName={storeName}/>
-            <p className="mobile-filter-btn" onClick={handleClick}>Filter : <span>{state.currentCategory}</span><span>${state.currentPrice}</span>
+            <p className={`mobile-filter-btn ${open && 'active'}`} onClick={handleClick}>Filter : <span>{state.currentCategory}</span><span>${state.currentPrice}</span>
             {open ? <FaAngleUp/> : <FaAngleDown/>}</p>
             <div className="wrapper">
             <div className={`mobile-section ${open && 'active'}`} >

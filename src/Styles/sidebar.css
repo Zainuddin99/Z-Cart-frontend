@@ -78,19 +78,23 @@ aside > *{
     width: 100%;
 }
 .sidebarSearch{
-    margin: 5px auto;
+    margin: 3px auto;
 }
 .mobile-filter-btn{
     text-transform: capitalize;
     display:flex;
     justify-content: space-between;
-    background-color: rgb(101, 73, 201);
+    background-color: rgb(152, 135, 216);
     color: white;
+    border:2px inset rgb(95, 63, 207);
     align-items: center;
-    padding: 7px 10px;
+    padding: 9px 10px;
     font-size: 13px;
     font-weight: lighter;
     cursor: pointer;
+}
+.mobile-filter-btn.active{
+    background-color: rgb(121, 102, 189);
 }
 .mobile-filter-btn span{
     font-weight: bold;
@@ -112,7 +116,7 @@ aside > *{
     overflow: hidden;
     transition: 0.4s ease-in-out;
     position: absolute;
-    z-index: 200
+    z-index: 200;
 }
 .mobile-section.active{
     height: fit-content;
@@ -128,7 +132,7 @@ aside > *{
     font-weight: bolder;
 }
 .sidebarCategories, .sidebarPrice{
-    padding:0;
+    padding:0 26px;
     background-color: rgb(184, 207, 226);
     width: 100%;
     margin: auto;
@@ -150,7 +154,10 @@ aside > *{
 .sidebarPrice input{
     width: 70%;
 }
-.sidebarSearch input{
-    padding: 5px;
+.mobile-whole-wrapper{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 }

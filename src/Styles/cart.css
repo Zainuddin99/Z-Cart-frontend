@@ -198,11 +198,11 @@ footer{
     background-color: rgb(0, 0, 0,0);
 }
 .mycart > *{
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     font-weight: bolder;
 }
 .item-info{
-    font-size: 10px;
+    font-size: 12px;
     display: block;
 }
 .cart-view{
