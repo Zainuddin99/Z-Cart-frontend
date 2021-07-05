@@ -194,6 +194,10 @@ footer{
     font-size: small;
     background-color: transparent;
 }
+.close:hover{
+    background-color: transparent;
+    border:none
+}
 .mycart:hover{
     background-color: rgb(0, 0, 0,0);
 }
