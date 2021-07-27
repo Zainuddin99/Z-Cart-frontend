@@ -64,7 +64,7 @@ function Navbar() {
             </Link>
             </li>
             
-                <li>Login</li>
+                <li><Link to='/login'>Login</Link></li>
                 <li className="menu-btn" onClick={()=>setIsSideBarOpen(true)}><FaBars/></li>
             </ul>
         </nav>

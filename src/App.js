@@ -9,6 +9,9 @@ import ErrorPage from "./Component/ErrorPage";
 import { useDispatch, useSelector } from "react-redux";
 import { updateStoredCart } from "./Redux/cartReducerActionCreator";
 import Footer from "./Component/Footer";
+import Login from "./Component/Login";
+import Signup from "./Component/SignUp/index";
+import Modal from "./Component/Modal";
 
 const storedCart = JSON.parse(localStorage.getItem('cart'))
 
@@ -27,6 +30,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Modal/>
         <Navbar />
         <Switch>
           <Route exact path='/'>
@@ -40,6 +44,12 @@ function App() {
           </Route>
           <Route path='/carts'>
             <CartPage/>
+          </Route>
+          <Route path='/login'>
+            <Login/>
+          </Route>
+          <Route path='/signup'>
+            <Signup/>
           </Route>
           <Route path='*'>
             <ErrorPage/>

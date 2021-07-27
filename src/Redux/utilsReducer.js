@@ -1,17 +1,39 @@
 const initialState = {
-    pageActive:{dailyEssential:'', homeFurnitures:''}
+    pageActive:{dailyEssential:'', homeFurnitures:''},
+    loading: false,
+    errorMessage: '',
+    modal: {open: false, content: ''}
 }
 
 export const utilsReducer = (state=initialState, action) =>{
     switch(action.type){
         case 'SWITCH TO PAGE':
             if(action.payload === "products"){
-                return {dailyEssential:'active', homeFurnitures:''}
+                return {...state, dailyEssential:'active', homeFurnitures:''}
             }
             if(action.payload === 'furnitures'){
-                return {dailyEssential:'', homeFurnitures:'active'}
+                return {...state, dailyEssential:'', homeFurnitures:'active'}
             }
-            return {dailyEssential:'', homeFurnitures:''}
+            return {...state, dailyEssential:'', homeFurnitures:''}
+        case 'START LOADING': 
+        return {
+            ...state, loading: true
+        }
+        case 'STOP LOADING': return {
+            ...state, loading: false
+        }
+        case 'HANDLE ERROR': return{
+            ...state, loading: false, errorMessage: action.payload
+        }
+        case 'CLEAR ERROR': return {
+            ...state, errorMessage: ""
+        }
+        case 'OPEN MODAL': return {
+            ...state, modal:{open: true, content: action.payload}
+        }
+        case 'CLOSE MODAL': return {
+            ...state, modal:{open: false, content: ''}
+        }
         default:return state
     }
 }

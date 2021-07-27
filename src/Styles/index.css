@@ -331,6 +331,33 @@ footer span{
   color: red;
 }
 
+.modal{
+  position: absolute;
+  background-color: tomato;
+  color: white;
+  width: fit-content;
+  left: 50%;
+  z-index: 1000;
+  padding: 3px 60px;
+  transform: translate(-50%, 0);
+  transition: 0.2s ease;
+}
+.modal-enter{
+  top: 0;
+}
+.modal-enter-active{
+  top: 35px;
+}
+.modal-enter-done{
+  top: 35px;
+}
+.modal-exit{
+  top: 0;
+}
+.modal-exit-active{
+  top: 0;
+}
+
 
 @media only screen and (max-width: 700px) {
   nav{
@@ -516,4 +543,6 @@ footer{
   font-size: 2.8vw;
 }
 }
+
+
 
