@@ -12,16 +12,25 @@ import Footer from "./Component/Footer";
 import Login from "./Component/Login";
 import Signup from "./Component/SignUp/index";
 import Modal from "./Component/Modal";
+import { verifyLoggeduser } from "./Redux/utilsActionCreatore";
 
 const storedCart = JSON.parse(localStorage.getItem('cart'))
 
 function App() {
   const cart = useSelector(state=>state.cart)
+  const user = useSelector(state=>state.utils.loggedUser)
   const dispatch = useDispatch()
 
     useEffect(()=>{
         localStorage.setItem("cart", JSON.stringify(cart))
     },[cart])
+
+    useEffect(()=>{
+      const token = localStorage.getItem('userToken')
+      if(token){
+        dispatch(verifyLoggeduser(token))
+      }
+    }, [])
 
     useEffect(()=>{
       dispatch(updateStoredCart(storedCart))

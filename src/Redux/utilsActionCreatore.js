@@ -1,5 +1,4 @@
-import { signIn, signUp } from "../api"
-const axios = require('axios')
+import { signIn, signUp, verifyToken } from "../api"
 
 export const switchToPage = (page) =>{
     return {
@@ -27,6 +26,13 @@ const handleError = (message) =>{
     }
 }
 
+export const addLoggedUser = (user) =>{
+    return {
+        type: 'ADD LOGGED USER',
+        payload: user
+    }
+}
+
 export const openModal = (content) =>{
     return {
         type: 'OPEN MODAL',
@@ -40,13 +46,11 @@ export const closeModal = () =>{
     }
 }
 
-
-
 export const handleSubmitSign = (data, type) =>{
     return async(dispatch) =>{
 
         const signAfterTasks = (modalMessage) =>{
-    dispatch(stopLoading())
+        dispatch(stopLoading())
         dispatch(openModal(modalMessage))
         window.history.back()
         }
@@ -55,8 +59,10 @@ export const handleSubmitSign = (data, type) =>{
 
         try{
         if(type === 'signin'){
-        await signIn(data)
+        const response = await signIn(data)
+        localStorage.setItem("userToken", response.data.userToken)
         signAfterTasks('Successfully logged in')
+        dispatch(verifyLoggeduser(response.data.userToken))
         }else{
             await signUp(data)
             signAfterTasks('Successfully signed in')
@@ -67,8 +73,24 @@ export const handleSubmitSign = (data, type) =>{
     }
 }
 
+export const verifyLoggeduser = (token) =>{
+    return async(dispatch) => {
+        try {
+            const response = await verifyToken(token)
+            dispatch(addLoggedUser(response.data))
+        } catch (error) {
+        }
+    }
+}
+
 export const clearErrorMessage = () =>{
     return {
         type: 'CLEAR ERROR'
+    }
+}
+
+export const logoutUser = () =>{
+    return {
+        type: 'LOGOUT USER'
     }
 }

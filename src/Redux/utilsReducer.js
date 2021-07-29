@@ -2,7 +2,8 @@ const initialState = {
     pageActive:{dailyEssential:'', homeFurnitures:''},
     loading: false,
     errorMessage: '',
-    modal: {open: false, content: ''}
+    modal: {open: false, content: ''},
+    loggedUser: null
 }
 
 export const utilsReducer = (state=initialState, action) =>{
@@ -33,6 +34,12 @@ export const utilsReducer = (state=initialState, action) =>{
         }
         case 'CLOSE MODAL': return {
             ...state, modal:{open: false, content: ''}
+        }
+        case 'ADD LOGGED USER': return {
+            ...state, loggedUser: action.payload
+        }
+        case 'LOGOUT USER': return{
+            ...state, loggedUser: null
         }
         default:return state
     }

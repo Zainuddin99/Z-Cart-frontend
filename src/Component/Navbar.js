@@ -1,12 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, StaticRouter } from 'react-router-dom'
 import {FaBars, FaWindowClose} from 'react-icons/fa'
+import { logoutUser, openModal } from '../Redux/utilsActionCreatore'
 
 function Navbar() {
     const [isSidebarOpen, setIsSideBarOpen] = useState(false)
-    const linkBtn = useRef(null)
     const numberOfCartItems = useSelector(state => state.cart.numberOfItems)
+    const user = useSelector(state => state.utils.loggedUser)
+    const dispatch = useDispatch()
 
     useEffect(()=>{
         window.addEventListener('resize',()=>{
@@ -18,6 +20,14 @@ function Navbar() {
             return ()=>window.removeEventListener('resize')
         })
     })
+
+    const logoutUserHandle = () =>{
+        if(window.confirm('Are you sure to logout?')){
+            localStorage.removeItem('userToken')
+            dispatch(logoutUser())
+            dispatch(openModal('Successfully logged out'))
+        }
+    }
     
     return (
         <nav>
@@ -64,7 +74,7 @@ function Navbar() {
             </Link>
             </li>
             
-                <li><Link to='/login'>Login</Link></li>
+                <li>{user ? <div onClick={logoutUserHandle} style={{"cursor":'pointer'}}>Sign out</div> : <Link to='/login'>Login</Link>}</li>
                 <li className="menu-btn" onClick={()=>setIsSideBarOpen(true)}><FaBars/></li>
             </ul>
         </nav>
