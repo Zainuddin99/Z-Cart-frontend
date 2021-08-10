@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearErrorMessage, handleSubmitSign } from '../../Redux/utilsActionCreatore'
+import GoogleSign from '../GoogleSign'
 
 function Signup() {
     const [inputes, setInputs] = useState({firstName: '', lastName: '', eMail: '', password: '', confirmPassword: ''})
@@ -43,11 +44,11 @@ function Signup() {
     return (
         <div className='form-container'>
         <form className='login' onSubmit={handleSubmit}>
-            <input type="text" name='firstName' placeholder='First Name' value={inputes.firstName} onChange={handleInput}/>
-            <input type="text" name='lastName' placeholder="Last Name" value={inputes.lastName} onChange={handleInput}/>
-            <input type="email" name='eMail' placeholder='Enter E-Mail' value={inputes.eMail} onChange={handleInput} />
+            <input type="text" name='firstName' placeholder='First Name' value={inputes.firstName} onChange={handleInput} autoComplete='off' />
+            <input type="text" name='lastName' placeholder="Last Name" value={inputes.lastName} onChange={handleInput} autoComplete='off' />
+            <input type="email" name='eMail' placeholder='Enter E-Mail' value={inputes.eMail} onChange={handleInput} autoComplete='off' />
             {inputError.eMail && <p className='form-inline-error'>{inputError.eMail}</p>}
-            <input type="password" name='password' placeholder='Password' value={inputes.password} onChange={handleInput}/>
+            <input type="password" name='password' placeholder='Password' value={inputes.password} onChange={handleInput} />
             {inputError.password && <p className='form-inline-error'>{inputError.password}</p>}
             <input type="password" name='confirmPassword' placeholder='Confirm Password' value={inputes.confirmPassword} onChange={handleInput}/>
             {inputError.confirmPassword && <p className='form-inline-error'>{inputError.confirmPassword}</p>}
@@ -56,7 +57,7 @@ function Signup() {
             <button type='submit'>{state.loading ? 'Please wait' : 'Sign up'}</button>
         </form>
         <div className='google-sign'>
-            <button>Sign up with Google</button>
+            <GoogleSign/>
         </div>
         </div>
     )

@@ -15,6 +15,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.anauthorized-container{
+  margin: 30px;
+  text-align: center;
+  margin-bottom: 100px;
+}
+.anauthorized-container > *:nth-child(2){
+  background-color: green;
+  color: white;
+  position: relative;
+  top:30px;
+  padding: 10px 50px;
+}
+
+
 nav{
   display: flex;
   padding: 20px 0;
@@ -332,7 +347,7 @@ footer span{
 }
 
 .modal{
-  position: absolute;
+  position: fixed;
   background-color: tomato;
   color: white;
   width: fit-content;

@@ -6,15 +6,17 @@ import { fetchProductsAction } from '../../Redux/dailyEssentialActionCreator'
 import { fetchFurnitureAction} from '../../Redux/furnituresActionCreator'
 import Loader from '../Loader'
 import '../../Styles/products-details.css'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import CartManager from './CartManager'
 import { addItemsToCart } from '../../Redux/cartReducerActionCreator'
 
 function ProductDetails() {
     const {id, storeName} = useParams()
-    const state = useSelector(state=>state.[storeName])
+    const state = useSelector(state=>state?.[storeName])
+    const loggedUser = useSelector(state => state.utils.loggedUser)
     const dispatch = useDispatch()
     const [pageItem, setPageItem] = useState({})
+    const history = useHistory()
 
     useEffect(()=>{
         if(storeName === "furnitures"){
@@ -57,7 +59,12 @@ function ProductDetails() {
     }
 
     const callDispatch = () =>{
+        if(loggedUser){
         dispatch(addItemsToCart(pageItem))
+        history.push('/carts')
+        }else{
+            history.push('/login')
+        }
     }
 
     const {image, name, title, description, price,category, company} = pageItem

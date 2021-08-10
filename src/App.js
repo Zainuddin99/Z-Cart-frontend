@@ -33,7 +33,7 @@ function App() {
     }, [])
 
     useEffect(()=>{
-      dispatch(updateStoredCart(storedCart))
+      dispatch(updateStoredCart())
     },[])
 
   return (

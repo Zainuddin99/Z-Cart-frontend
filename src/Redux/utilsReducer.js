@@ -38,7 +38,8 @@ export const utilsReducer = (state=initialState, action) =>{
         case 'ADD LOGGED USER': return {
             ...state, loggedUser: action.payload
         }
-        case 'LOGOUT USER': return{
+        case 'LOGOUT USER':
+            return{
             ...state, loggedUser: null
         }
         default:return state

@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, StaticRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {FaBars, FaWindowClose} from 'react-icons/fa'
 import { logoutUser, openModal } from '../Redux/utilsActionCreatore'
 
@@ -47,8 +47,8 @@ function Navbar() {
             </ul>
             <ul className="Extra-menus">
                 <Link to='carts' onClick={()=>setIsSideBarOpen(false)}>You cart ({numberOfCartItems} items)</Link>
-                <li>Register</li>
-                <li>Login</li>
+                <Link to='/signup' onClick={()=>setIsSideBarOpen(false)}>Register</Link>
+                {!user && <Link to='/login' onClick={()=>setIsSideBarOpen(false)}>Login</Link>}
             </ul>
             </div>
             </>

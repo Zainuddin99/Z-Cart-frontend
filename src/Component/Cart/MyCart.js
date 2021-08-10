@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {FaTrash} from 'react-icons/fa'
 import { deleterCartItem } from '../../Redux/cartReducerActionCreator'
@@ -18,7 +18,7 @@ function MyCart({items}) {
             <hr />
             {
                 items.map((item)=>{
-                    const {title,name,image, cart, price,id} = item
+                    const {title,name,image, cart, price,id, productId} = item
                     return(
                         <>
                         <div className="mycart" key={id}>
@@ -31,7 +31,7 @@ function MyCart({items}) {
                             <p>${price}</p>
                             <p>{cart}</p>
                             <p>${(price*cart).toFixed(2)}</p>
-                            <p className="close" onClick={()=>dispatch(deleterCartItem(id))}><FaTrash/></p>
+                            <p className="close" onClick={()=>dispatch(deleterCartItem(id || productId))}><FaTrash/></p>
                         </div>
                         <hr key={id+"copy"} />
                         </>

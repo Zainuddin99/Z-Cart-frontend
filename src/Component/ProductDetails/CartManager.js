@@ -1,4 +1,9 @@
+import { useSelector } from "react-redux"
+import {Link} from 'react-router-dom'
+
 function CartManager({number, handleCartNumber, callDispatch}) {
+
+    const loggedUser = useSelector(state => state.utils.loggedUser)
 
     return (
         <div className="cart-manager">
@@ -7,7 +12,7 @@ function CartManager({number, handleCartNumber, callDispatch}) {
                 <p>{number}</p>
                 <button onClick={()=>handleCartNumber('add')}>+</button>
             </div>
-            <button onClick={callDispatch}>Add to cart</button>
+            <button onClick={callDispatch} >{loggedUser ? `Add to cart` : `Login to shop`}</button>
         </div>
     )
 }

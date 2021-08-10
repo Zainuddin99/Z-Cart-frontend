@@ -1,4 +1,5 @@
 import { signIn, signUp, verifyToken } from "../api"
+import {updateStoredCart, clearStoredCart} from './cartReducerActionCreator'
 
 export const switchToPage = (page) =>{
     return {
@@ -63,6 +64,7 @@ export const handleSubmitSign = (data, type) =>{
         localStorage.setItem("userToken", response.data.userToken)
         signAfterTasks('Successfully logged in')
         dispatch(verifyLoggeduser(response.data.userToken))
+        dispatch(updateStoredCart())
         }else{
             await signUp(data)
             signAfterTasks('Successfully signed in')
@@ -79,6 +81,7 @@ export const verifyLoggeduser = (token) =>{
             const response = await verifyToken(token)
             dispatch(addLoggedUser(response.data))
         } catch (error) {
+            localStorage.clear('userToken')
         }
     }
 }
@@ -89,8 +92,15 @@ export const clearErrorMessage = () =>{
     }
 }
 
-export const logoutUser = () =>{
+const logoutUserClient = () =>{
     return {
         type: 'LOGOUT USER'
+    }
+}
+
+export const logoutUser = () => {
+    return dispatch => {
+        dispatch(logoutUserClient())
+        dispatch(clearStoredCart())
     }
 }
